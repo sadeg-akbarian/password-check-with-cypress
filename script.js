@@ -22,7 +22,6 @@ function initialForm() {
     inputType: passwordOne.type,
   };
   localStorage.setItem("formState", JSON.stringify(formState));
-  console.log(formState);
 }
 
 initialForm();
@@ -40,7 +39,6 @@ function initialComparison() {
     "passwordComparison",
     JSON.stringify(passwordComparison)
   );
-  console.log(passwordComparison);
 }
 
 initialComparison();
@@ -59,7 +57,6 @@ initialSymbols();
 
 function renderState() {
   const formState = JSON.parse(localStorage.getItem("formState"));
-  console.log(formState);
   passwordButton.innerText = formState.buttonText;
   passwordOne.type = formState.inputType;
   passwordTwo.type = formState.inputType;
@@ -67,7 +64,6 @@ function renderState() {
   const passwordComparison = JSON.parse(
     localStorage.getItem("passwordComparison")
   );
-  console.log(passwordComparison);
   initialSymbols();
   if (passwordComparison.equal === "yes") {
     symbolEqual.innerText = "✅";
@@ -89,7 +85,6 @@ function renderState() {
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 formular.addEventListener("click", function () {
-  console.log("aaaaaaaaaaaaa");
   errorDiv.style.display = "none";
   errorTriangleOne.style.display = "none";
   errorTriangleTwo.style.display = "none";
@@ -98,7 +93,6 @@ formular.addEventListener("click", function () {
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 formular.addEventListener("keydown", function () {
-  console.log("aaaaaaaaaaaaa");
   errorDiv.style.display = "none";
   errorTriangleOne.style.display = "none";
   errorTriangleTwo.style.display = "none";
@@ -108,31 +102,22 @@ formular.addEventListener("keydown", function () {
 
 function lowerCase() {
   const firstValue = passwordOne.value;
-  console.log(firstValue);
   let counter = 0;
 
   for (let i = 0; i < firstValue.length; i++) {
-    console.log(firstValue[i]);
     const isFirstValueLow = firstValue[i] === firstValue[i].toLowerCase();
-    console.log(parseInt(firstValue[i]));
     const isANumber = firstValue[i] == parseInt(firstValue[i]);
-    console.log(isFirstValueLow);
-    console.log(isANumber);
     if (isFirstValueLow && !isANumber) {
       counter++;
-      console.log(counter);
     }
   }
 
   const passwordComparison = JSON.parse(
     localStorage.getItem("passwordComparison")
   );
-  console.log(passwordComparison);
   if (counter >= 1) {
-    console.log("cccccccccccc");
     passwordComparison.lowCase = "yes";
   }
-  console.log(passwordComparison);
   localStorage.setItem(
     "passwordComparison",
     JSON.stringify(passwordComparison)
@@ -143,19 +128,13 @@ function lowerCase() {
 
 function upperCase() {
   const firstValue = passwordOne.value;
-  console.log(firstValue);
   let counter = 0;
 
   for (let i = 0; i < firstValue.length; i++) {
-    console.log(firstValue[i]);
     const isFirstValueUpp = firstValue[i] === firstValue[i].toUpperCase();
-    console.log(parseInt(firstValue[i]));
     const isANumber = firstValue[i] == parseInt(firstValue[i]);
-    console.log(isFirstValueUpp);
-    console.log(isANumber);
     if (isFirstValueUpp && !isANumber) {
       counter++;
-      console.log(counter);
     }
   }
 
@@ -163,7 +142,6 @@ function upperCase() {
     localStorage.getItem("passwordComparison")
   );
   if (counter >= 1) {
-    console.log("ppppppppppp");
     passwordComparison.uppCase = "yes";
   }
   localStorage.setItem(
@@ -176,16 +154,12 @@ function upperCase() {
 
 function numberInIt() {
   const firstValue = passwordOne.value;
-  console.log(firstValue);
   let counter = 0;
 
   for (let i = 0; i < firstValue.length; i++) {
-    console.log(firstValue[i]);
     const isFirstValueNumber = firstValue[i] == parseInt(firstValue[i]);
-    console.log(isFirstValueNumber);
     if (isFirstValueNumber) {
       counter++;
-      console.log(counter);
     }
   }
 
@@ -193,7 +167,6 @@ function numberInIt() {
     localStorage.getItem("passwordComparison")
   );
   if (counter >= 1) {
-    console.log("ppppppppppp");
     passwordComparison.numbers = "yes";
   }
   localStorage.setItem(
@@ -206,8 +179,6 @@ function numberInIt() {
 
 function tenCharacters() {
   const firstValue = passwordOne.value;
-  console.log(firstValue);
-  console.log(firstValue.length);
   const passwordComparison = JSON.parse(
     localStorage.getItem("passwordComparison")
   );
@@ -224,13 +195,10 @@ function tenCharacters() {
 
 function thePassword() {
   const firstValue = passwordOne.value;
-  console.log(firstValue);
   const passwordComparison = JSON.parse(
     localStorage.getItem("passwordComparison")
   );
-  console.log(passwordComparison);
   const theValues = Object.values(passwordComparison);
-  console.log(theValues);
   const noIncluded = theValues.includes("no");
   if (!noIncluded) {
     localStorage.setItem("password", JSON.stringify(firstValue));
@@ -245,7 +213,6 @@ function isEqual() {
     localStorage.getItem("passwordComparison")
   );
   if (passwordOne.value === passwordTwo.value) {
-    console.log("öööööööööö");
     passwordComparison.equal = "yes";
   }
   localStorage.setItem(
@@ -258,51 +225,33 @@ function isEqual() {
 
 function compareThePasswords(event) {
   const inputValue = event.target.value;
-  console.log(event.target.value);
   const isValid = /^[a-zA-Z0-9üöäßÜÖÄ]+$/.test(inputValue);
 
   if (isValid) {
-    console.log("qqqqqqqqqq");
     isEqual();
-    console.log("Iiiiiyeeeeesss");
     const passwordComparison = JSON.parse(
       localStorage.getItem("passwordComparison")
     );
     if (passwordComparison.equal === "yes") {
-      console.log("aaaaaaaaaaa");
       lowerCase();
-      console.log("Iiiiiyeeeeesss");
       upperCase();
-      console.log("Iiiiiyeeeeesss");
       numberInIt();
-      console.log("Iiiiiyeeeeesss");
       tenCharacters();
-      console.log("Iiiiiyeeeeesss");
       thePassword();
-      console.log("Iiiiiyeeeeesss");
     }
   } else if (event.target.value !== "") {
-    console.log("fffffffffffffff");
-    console.log(event.target.id);
-    console.log(passwordOne.id);
     errorDiv.style.display = "block";
     if (event.target.id === passwordOne.id) {
-      console.log("kkkkkkkkkk");
       errorDiv.style.top = "-25px";
       errorDiv.style.left = "40px";
       errorTriangleOne.style.display = "block";
     } else {
-      console.log("kkkkkkkkkk");
       errorDiv.style.top = "80px";
       errorDiv.style.left = "40px";
       errorTriangleTwo.style.display = "block";
     }
-    console.log(event.target.value);
-    console.log(inputValue.slice(0, -1));
     event.target.value = inputValue.slice(0, -1);
-    console.log(event.target.value);
   } else if (event.target.value === "") {
-    console.log("iiiiiiiiiiiiiiii");
     initialComparison();
   }
 }
@@ -310,18 +259,14 @@ function compareThePasswords(event) {
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 passwordOne.addEventListener("input", function (event) {
-  console.log("sssssssssssssssss");
   compareThePasswords(event);
-  console.log("yyyyyyyyyy");
   renderState();
 });
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 passwordTwo.addEventListener("input", function (event) {
-  console.log("sssssssssssssssss");
   compareThePasswords(event);
-  console.log("yyyyyyyyyy");
   renderState();
 });
 
@@ -330,11 +275,9 @@ passwordTwo.addEventListener("input", function (event) {
 passwordButton.addEventListener("click", function () {
   const formState = JSON.parse(localStorage.getItem("formState"));
   if (passwordOne.type === "password") {
-    console.log("jena");
     formState.buttonText = "Hide Passwords";
     formState.inputType = "text";
   } else {
-    console.log("deter");
     formState.buttonText = "Show Passwords";
     formState.inputType = "password";
   }
