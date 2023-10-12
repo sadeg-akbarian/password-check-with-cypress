@@ -3,6 +3,13 @@ const passwordOne = document.querySelector("#password_one");
 const passwordTwo = document.querySelector("#password_two");
 const errorDiv = document.querySelector("#error_div");
 const passwordButton = document.querySelector("#password_button");
+const errorTriangleOne = document.querySelector("#error_triangle_one");
+const errorTriangleTwo = document.querySelector("#error_triangle_two");
+const symbolEqual = document.querySelector("#symbol_equal");
+const symbolLower = document.querySelector("#symbol_lower");
+const symbolUpper = document.querySelector("#symbol_upper");
+const symbolNumbers = document.querySelector("#symbol_numbers");
+const symbolTenCharacters = document.querySelector("#symbol_tenCharacters");
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -38,6 +45,16 @@ function initialComparison() {
 
 initialComparison();
 
+function initialSymbols() {
+  symbolEqual.innerText = "❌";
+  symbolLower.innerText = "❌";
+  symbolUpper.innerText = "❌";
+  symbolNumbers.innerText = "❌";
+  symbolTenCharacters.innerText = "❌";
+}
+
+initialSymbols();
+
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 function renderState() {
@@ -51,35 +68,21 @@ function renderState() {
     localStorage.getItem("passwordComparison")
   );
   console.log(passwordComparison);
-  const symbolEqual = document.querySelector("#symbol_equal");
+  initialSymbols();
   if (passwordComparison.equal === "yes") {
     symbolEqual.innerText = "✅";
-  } else {
-    symbolEqual.innerText = "❌";
   }
-  const symbolLower = document.querySelector("#symbol_lower");
   if (passwordComparison.lowCase === "yes") {
     symbolLower.innerText = "✅";
-  } else {
-    symbolLower.innerText = "❌";
   }
-  const symbolUpper = document.querySelector("#symbol_upper");
   if (passwordComparison.uppCase === "yes") {
     symbolUpper.innerText = "✅";
-  } else {
-    symbolUpper.innerText = "❌";
   }
-  const symbolNumbers = document.querySelector("#symbol_numbers");
   if (passwordComparison.numbers === "yes") {
     symbolNumbers.innerText = "✅";
-  } else {
-    symbolNumbers.innerText = "❌";
   }
-  const symbolTenCharacters = document.querySelector("#symbol_tenCharacters");
   if (passwordComparison.tenChar === "yes") {
     symbolTenCharacters.innerText = "✅";
-  } else {
-    symbolTenCharacters.innerText = "❌";
   }
 }
 
@@ -88,6 +91,17 @@ function renderState() {
 formular.addEventListener("click", function () {
   console.log("aaaaaaaaaaaaa");
   errorDiv.style.display = "none";
+  errorTriangleOne.style.display = "none";
+  errorTriangleTwo.style.display = "none";
+});
+
+// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+formular.addEventListener("keydown", function () {
+  console.log("aaaaaaaaaaaaa");
+  errorDiv.style.display = "none";
+  errorTriangleOne.style.display = "none";
+  errorTriangleTwo.style.display = "none";
 });
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -117,9 +131,6 @@ function lowerCase() {
   if (counter >= 1) {
     console.log("cccccccccccc");
     passwordComparison.lowCase = "yes";
-  } else {
-    console.log("cccccccccccc");
-    passwordComparison.lowCase = "no";
   }
   console.log(passwordComparison);
   localStorage.setItem(
@@ -154,9 +165,6 @@ function upperCase() {
   if (counter >= 1) {
     console.log("ppppppppppp");
     passwordComparison.uppCase = "yes";
-  } else {
-    console.log("ppppppppppp");
-    passwordComparison.uppCase = "no";
   }
   localStorage.setItem(
     "passwordComparison",
@@ -187,9 +195,6 @@ function numberInIt() {
   if (counter >= 1) {
     console.log("ppppppppppp");
     passwordComparison.numbers = "yes";
-  } else {
-    console.log("ppppppppppp");
-    passwordComparison.numbers = "no";
   }
   localStorage.setItem(
     "passwordComparison",
@@ -208,8 +213,6 @@ function tenCharacters() {
   );
   if (firstValue.length >= 10) {
     passwordComparison.tenChar = "yes";
-  } else {
-    passwordComparison.tenChar = "no";
   }
   localStorage.setItem(
     "passwordComparison",
@@ -241,10 +244,7 @@ function isEqual() {
   const passwordComparison = JSON.parse(
     localStorage.getItem("passwordComparison")
   );
-  if (passwordOne.value !== passwordTwo.value) {
-    console.log("öööööööööö");
-    passwordComparison.equal = "no;";
-  } else {
+  if (passwordOne.value === passwordTwo.value) {
     console.log("öööööööööö");
     passwordComparison.equal = "yes";
   }
@@ -256,9 +256,9 @@ function isEqual() {
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-function compareThePasswords(abc) {
-  const inputValue = abc.target.value;
-  console.log(abc.target.value);
+function compareThePasswords(event) {
+  const inputValue = event.target.value;
+  console.log(event.target.value);
   const isValid = /^[a-zA-Z0-9üöäßÜÖÄ]+$/.test(inputValue);
 
   if (isValid) {
@@ -281,10 +281,27 @@ function compareThePasswords(abc) {
       thePassword();
       console.log("Iiiiiyeeeeesss");
     }
-  } else if (abc.target.value !== "") {
+  } else if (event.target.value !== "") {
     console.log("fffffffffffffff");
+    console.log(event.target.id);
+    console.log(passwordOne.id);
     errorDiv.style.display = "block";
-  } else if (abc.target.value === "") {
+    if (event.target.id === passwordOne.id) {
+      console.log("kkkkkkkkkk");
+      errorDiv.style.top = "-25px";
+      errorDiv.style.left = "40px";
+      errorTriangleOne.style.display = "block";
+    } else {
+      console.log("kkkkkkkkkk");
+      errorDiv.style.top = "80px";
+      errorDiv.style.left = "40px";
+      errorTriangleTwo.style.display = "block";
+    }
+    console.log(event.target.value);
+    console.log(inputValue.slice(0, -1));
+    event.target.value = inputValue.slice(0, -1);
+    console.log(event.target.value);
+  } else if (event.target.value === "") {
     console.log("iiiiiiiiiiiiiiii");
     initialComparison();
   }
@@ -310,7 +327,7 @@ passwordTwo.addEventListener("input", function (event) {
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-passwordButton.addEventListener("click", function (event) {
+passwordButton.addEventListener("click", function () {
   const formState = JSON.parse(localStorage.getItem("formState"));
   if (passwordOne.type === "password") {
     console.log("jena");
