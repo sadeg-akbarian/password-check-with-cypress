@@ -29,29 +29,40 @@
           <input type="password" class="password_one" id="password_one" />
           <label for="password_two">Repeat the password</label>
           <input type="password" class="password_two" id="password_two" />
-          <button type="button">Show Passwords</button>
+          <div class="error_div" id="error_div">
+            Please type in only letters and numbers!!!
+          </div>
+          <div
+            class="triangle error_triangle_one"
+            id="error_triangle_one"
+          ></div>
+          <div
+            class="triangle error_triangle_two"
+            id="error_triangle_two"
+          ></div>
+          <button type="button" id="password_button">Show Passwords</button>
         </form>
       </div>
       <div class="requirement_div" id="requirement_div">
         <p>
           <span>Passwords are equal</span
-          ><span class="symbol" id="symbol_equal">❌</span>
+          ><span class="symbol" id="symbol_equal"></span>
         </p>
         <p>
           <span>Lower Case Letters</span
-          ><span class="symbol" id="symbol_lower">❌</span>
+          ><span class="symbol" id="symbol_lower"></span>
         </p>
         <p>
           <span>Upper Case Letters</span
-          ><span class="symbol" id="symbol_upper">❌</span>
+          ><span class="symbol" id="symbol_upper"></span>
         </p>
         <p>
           <span>Contains Numbers</span
-          ><span class="symbol" id="symbol_numbers">❌</span>
+          ><span class="symbol" id="symbol_numbers"></span>
         </p>
         <p>
           <span>At least 10 characters long</span
-          ><span class="symbol" id="symbol_tenCharacters">❌</span>
+          ><span class="symbol" id="symbol_tenCharacters"></span>
         </p>
       </div>
     </main>
