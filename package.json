@@ -1,0 +1,16 @@
+{
+  "name": "password-check-with-cypress",
+  "version": "1.0.0",
+  "description": "This web app checks wether a password fulfills certain requirements 😉",
+  "scripts": {
+    "serve": "serve ./src",
+    "e2e": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "serve": "^14.2.1"
+  }
+}
